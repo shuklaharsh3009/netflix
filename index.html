@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiyaFlix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Who's Watching Section -->
+    <section id="user-selection" class="screen">
+        <div class="floating-bg" id="floating-bg"></div>
+        <div class="user-container">
+            <h1>Who's watching?</h1>
+            <div class="user-list">
+                <div class="user-profile" onclick="selectUser('Siya')">
+                    <div class="avatar">
+                        <img src="netflix/profiles/Siya.jpeg" alt="Siya">
+                    </div>
+                    <span>Siya</span>
+                </div>
+                <div class="user-profile" onclick="selectUser('Raghav')">
+                    <div class="avatar">
+                        <img src="netflix/profiles/Raghav.jpeg" alt="Raghav">
+                    </div>
+                    <span>Raghav</span>
+                </div>
+            </div>
+            <button class="manage-profiles">Manage Profiles</button>
+        </div>
+    </section>
+
+    <!-- Main Homepage Section -->
+    <section id="main-home" class="screen hidden">
+        <nav class="navbar">
+            <div class="navbar-left">
+                <h1 class="logo">SIYAFLIX</h1>
+            </div>
+            <div class="navbar-right">
+                <div id="current-user"></div>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <video id="hero-video" autoplay muted loop playsinline></video>
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h2 id="hero-title"></h2>
+                <p id="hero-desc"></p>
+                <div class="hero-btns">
+                    <button class="play-btn" id="hero-play-btn">▶ Play</button>
+                </div>
+            </div>
+            <div class="hero-row" id="hero-row">
+                <!-- All series and movies displayed here -->
+            </div>
+        </header>
+
+        <main class="content-rows">
+            <div class="row">
+                <h1 style="padding-left: 20px; margin-left: 2%; padding-top: 20px;">All Memories</h1>
+                <div class="movie-list" id="all-list">
+                    <!-- Dynamic content goes here -->
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Media Player Modal -->
+    <div id="media-player" class="media-player hidden">
+        <div class="player-close" onclick="closePlayer()">✕</div>
+        <div class="player-title" id="player-title"></div>
+        <div class="player-content" id="player-content">
+            <img id="player-image" src="" alt="">
+            <video id="player-video" controls></video>
+        </div>
+        <div class="player-progress">
+            <div class="player-progress-bar" id="player-progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="bg-audio"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
