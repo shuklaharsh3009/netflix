@@ -388,10 +388,13 @@ function closePlayer() {
     img.style.display = 'none';
     img.src = '';
 
-    // Stop background audio
     const bgAudio = document.getElementById('bg-audio');
     bgAudio.pause();
     bgAudio.src = '';
+    bgAudio.load();
+    
+    currentAudioList = [];
+    currentAudioIndex = 0;
 }
 
 function playMedia(index) {
