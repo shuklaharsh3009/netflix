@@ -60,7 +60,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
-    background: url('netflix/main_bg.jpeg') center/cover no-repeat;
+    background: url('netflix/main_bg.webp') center/cover no-repeat;
 }
 
 .floating-bg::after {
