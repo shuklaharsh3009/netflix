@@ -241,6 +241,7 @@ function initFloatingThumbnails() {
         const thumb = document.createElement('img');
         thumb.className = 'floating-thumb';
         thumb.src = allThumbnails[i % allThumbnails.length];
+        thumb.setAttribute('loading', 'lazy');
         
         const size = 80 + Math.random() * 120;
         thumb.style.width = `${size}px`;
@@ -442,6 +443,15 @@ function playMedia(index) {
             currentIndex++;
             playMedia(currentIndex);
         }, IMAGE_DURATION);
+    }
+
+    // Preload next 3 images
+    for (let i = 1; i <= 3; i++) {
+        const nextIndex = index + i;
+        if (nextIndex < mediaList.length && !isVideo(mediaList[nextIndex])) {
+            const preloadImg = new Image();
+            preloadImg.src = mediaList[nextIndex];
+        }
     }
 
     updateProgress();

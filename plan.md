@@ -19,43 +19,44 @@ Reduce load times, minimize data consumption, and improve playback smoothness.
 
 ---
 
-## Phase 2: Video Compression (Pending)
+## Phase 2: Video Compression ✅ COMPLETE
 
-### Action Required
-Compress `intro.mp4` files to 720p H.264.
+### Results
+- **7 intro videos** compressed to 720p H.264
+- **Total size reduced:** ~95MB → ~18MB (**80% savings**)
+- **Quality:** High (CRF 28), compatible with all browsers
+- **Audio:** Preserved (no re-encoding)
 
-**Install FFmpeg:**
-```bash
-brew install ffmpeg
-```
-
-**Compress videos:**
-```bash
-find netflix -name "intro.mp4" -exec sh -c 'ffmpeg -i "$1" -vcodec libx264 -crf 28 -vf scale=1280:720 -acodec copy "${1%.mp4}_720p.mp4" && mv "${1%.mp4}_720p.mp4" "$1"' _ {} \;
-```
+### Details
+| File | Before | After |
+|------|--------|-------|
+| Banaras | 21M | 3.0M |
+| Coorg | 23M | 4.0M |
+| GOA | 13M | 4.3M |
+| Mahabaleshwar | 12M | 2.0M |
+| Mathura | 13M | 2.0M |
+| Dapoli | 6.0M | 956K |
+| Matheran | 7.4M | 2.0M |
 
 ---
 
-## Phase 3: Code Optimization (Pending)
+## Phase 3: Code Optimization ✅ COMPLETE
 
-### 1. Preloading
-Add to `playMedia()` in `script.js`:
-```javascript
-if (index + 1 < mediaList.length && !isVideo(mediaList[index + 1])) {
-    const preloadImg = new Image();
-    preloadImg.src = mediaList[index + 1];
-}
-```
+### 1. Preloading Next 3 Images
+- Added loop in `playMedia()` to preload the next 3 images in the background.
+- Eliminates transition delays between slides.
 
 ### 2. Lazy Loading
-Add to floating thumbnails in `initFloatingThumbnails()`:
-```javascript
-thumb.setAttribute('loading', 'lazy');
-```
+- Added `loading="lazy"` to floating thumbnails on the profile screen.
+- Reduces initial page load time and data usage.
+
+### 3. Performance Tweaks
+- Smoother playback experience with pre-cached images.
+- Reduced memory footprint by not loading all thumbnails at once.
 
 ---
 
-## Folder Structure
+## Final Folder Structure
 ```
 netflix/
 ├── main_bg.webp          # Background image
@@ -64,7 +65,17 @@ netflix/
 ├── thumbnails/           # Generated thumbnails (WebP)
 ├── series/
 │   ├── GOA/
-│   │   ├── intro.mp4     # Needs compression
+│   │   ├── intro.mp4     # Compressed 720p
 │   │   ├── audio1.mp3
 │   │   └── IMG_*.webp    # Converted images
 ```
+
+## Execution Checklist
+- [x] Install conversion tools (Pillow via pip).
+- [x] Run batch conversion for Images (JPEG -> WebP with EXIF orientation fix).
+- [x] Run batch conversion for Thumbnails (Resize + WebP).
+- [x] Compress all `intro.mp4` files to 720p (FFmpeg).
+- [x] Update `script.js` DATA object with new paths/extensions.
+- [x] Add Preloading logic to `playMedia` (Next 3 images).
+- [x] Add Lazy Loading to floating thumbnails.
+- [x] Test playback speed and data usage.
